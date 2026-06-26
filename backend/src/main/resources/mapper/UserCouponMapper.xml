@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drinkorder.mapper.UserCouponMapper">
+
+    <resultMap id="UserCouponResultMap" type="com.drinkorder.entity.UserCoupon">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="coupon_id" property="couponId"/>
+        <result column="is_used" property="isUsed"/>
+        <result column="issued_at" property="issuedAt"/>
+        <result column="used_at" property="usedAt"/>
+    </resultMap>
+
+    <select id="findById" resultMap="UserCouponResultMap">
+        SELECT * FROM user_coupons WHERE id = #{id}
+    </select>
+
+    <select id="findByUserId" resultMap="UserCouponResultMap">
+        SELECT * FROM user_coupons WHERE user_id = #{userId}
+    </select>
+
+    <select id="findByUserIdAndIsUsed" resultMap="UserCouponResultMap">
+        SELECT * FROM user_coupons WHERE user_id = #{userId} AND is_used = #{isUsed}
+    </select>
+
+    <select id="findByUserIdAndCouponId" resultMap="UserCouponResultMap">
+        SELECT * FROM user_coupons WHERE user_id = #{userId} AND coupon_id = #{couponId}
+    </select>
+
+    <insert id="insert" parameterType="com.drinkorder.entity.UserCoupon">
+        INSERT INTO user_coupons (user_id, coupon_id, is_used, issued_at, used_at)
+        VALUES (#{userId}, #{couponId}, #{isUsed}, #{issuedAt}, #{usedAt})
+    </insert>
+
+    <update id="update" parameterType="com.drinkorder.entity.UserCoupon">
+        UPDATE user_coupons SET
+            user_id = #{userId},
+            coupon_id = #{couponId},
+            is_used = #{isUsed},
+            issued_at = #{issuedAt},
+            used_at = #{usedAt}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM user_coupons WHERE id = #{id}
+    </delete>
+
+    <update id="updateUsed">
+        UPDATE user_coupons SET is_used = #{isUsed}, used_at = #{usedAt} WHERE id = #{id}
+    </update>
+
+</mapper>

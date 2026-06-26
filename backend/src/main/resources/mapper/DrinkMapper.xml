@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drinkorder.mapper.DrinkMapper">
+
+    <resultMap id="DrinkResultMap" type="com.drinkorder.entity.Drink">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="price" property="price"/>
+        <result column="category" property="category"/>
+        <result column="image" property="image"/>
+        <result column="description" property="description"/>
+        <result column="stock" property="stock"/>
+        <result column="available" property="available"/>
+        <result column="merchant_id" property="merchantId"/>
+    </resultMap>
+
+    <select id="findById" resultMap="DrinkResultMap">
+        SELECT * FROM drinks WHERE id = #{id}
+    </select>
+
+    <select id="findAll" resultMap="DrinkResultMap">
+        SELECT * FROM drinks
+    </select>
+
+    <select id="findByCategory" resultMap="DrinkResultMap">
+        SELECT * FROM drinks WHERE category = #{category}
+    </select>
+
+    <select id="findByMerchantId" resultMap="DrinkResultMap">
+        SELECT * FROM drinks WHERE merchant_id = #{merchantId}
+    </select>
+
+    <select id="findAvailable" resultMap="DrinkResultMap">
+        SELECT * FROM drinks WHERE available = true
+    </select>
+
+    <insert id="insert" parameterType="com.drinkorder.entity.Drink" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO drinks (name, price, category, image, description, stock, available, merchant_id)
+        VALUES (#{name}, #{price}, #{category}, #{image}, #{description}, #{stock}, #{available}, #{merchantId})
+    </insert>
+
+    <update id="update" parameterType="com.drinkorder.entity.Drink">
+        UPDATE drinks SET
+            name = #{name},
+            price = #{price},
+            category = #{category},
+            image = #{image},
+            description = #{description},
+            stock = #{stock},
+            available = #{available},
+            merchant_id = #{merchantId}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM drinks WHERE id = #{id}
+    </delete>
+
+    <update id="updateStock">
+        UPDATE drinks SET stock = #{stock} WHERE id = #{id}
+    </update>
+
+    <update id="updateAvailable">
+        UPDATE drinks SET available = #{available} WHERE id = #{id}
+    </update>
+
+</mapper>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drinkorder.mapper.BranchMapper">
+
+    <resultMap id="BranchResultMap" type="com.drinkorder.entity.Branch">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="address" property="address"/>
+        <result column="phone" property="phone"/>
+        <result column="distance" property="distance"/>
+        <result column="rating" property="rating"/>
+        <result column="open" property="open"/>
+        <result column="merchant_id" property="merchantId"/>
+    </resultMap>
+
+    <select id="findById" resultMap="BranchResultMap">
+        SELECT * FROM branches WHERE id = #{id}
+    </select>
+
+    <select id="findAll" resultMap="BranchResultMap">
+        SELECT * FROM branches
+    </select>
+
+    <select id="findByMerchantId" resultMap="BranchResultMap">
+        SELECT * FROM branches WHERE merchant_id = #{merchantId}
+    </select>
+
+    <select id="findOpen" resultMap="BranchResultMap">
+        SELECT * FROM branches WHERE open = true
+    </select>
+
+    <insert id="insert" parameterType="com.drinkorder.entity.Branch">
+        INSERT INTO branches (name, address, phone, distance, rating, open, merchant_id)
+        VALUES (#{name}, #{address}, #{phone}, #{distance}, #{rating}, #{open}, #{merchantId})
+    </insert>
+
+    <update id="update" parameterType="com.drinkorder.entity.Branch">
+        UPDATE branches SET
+            name = #{name},
+            address = #{address},
+            phone = #{phone},
+            distance = #{distance},
+            rating = #{rating},
+            open = #{open},
+            merchant_id = #{merchantId}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM branches WHERE id = #{id}
+    </delete>
+
+</mapper>

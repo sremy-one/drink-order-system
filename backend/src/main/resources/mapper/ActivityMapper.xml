@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drinkorder.mapper.ActivityMapper">
+
+    <resultMap id="ActivityResultMap" type="com.drinkorder.entity.Activity">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="badge" property="badge"/>
+        <result column="description" property="description"/>
+        <result column="tag" property="tag"/>
+        <result column="image" property="image"/>
+        <result column="available" property="available"/>
+    </resultMap>
+
+    <select id="findById" resultMap="ActivityResultMap">
+        SELECT * FROM activities WHERE id = #{id}
+    </select>
+
+    <select id="findAll" resultMap="ActivityResultMap">
+        SELECT * FROM activities
+    </select>
+
+    <select id="findAvailable" resultMap="ActivityResultMap">
+        SELECT * FROM activities WHERE available = true
+    </select>
+
+    <insert id="insert" parameterType="com.drinkorder.entity.Activity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO activities (title, badge, description, tag, image, available)
+        VALUES (#{title}, #{badge}, #{description}, #{tag}, #{image}, #{available})
+    </insert>
+
+    <update id="update" parameterType="com.drinkorder.entity.Activity">
+        UPDATE activities SET
+            title = #{title},
+            badge = #{badge},
+            description = #{description},
+            tag = #{tag},
+            image = #{image},
+            available = #{available}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM activities WHERE id = #{id}
+    </delete>
+
+</mapper>

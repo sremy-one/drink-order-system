@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drinkorder.mapper.OrderItemMapper">
+
+    <resultMap id="OrderItemResultMap" type="com.drinkorder.entity.OrderItem">
+        <id column="id" property="id"/>
+        <result column="order_id" property="orderId"/>
+        <result column="drink_id" property="drinkId"/>
+        <result column="name" property="name"/>
+        <result column="quantity" property="quantity"/>
+        <result column="price" property="price"/>
+        <result column="image" property="image"/>
+    </resultMap>
+
+    <select id="findById" resultMap="OrderItemResultMap">
+        SELECT * FROM order_items WHERE id = #{id}
+    </select>
+
+    <select id="findByOrderId" resultMap="OrderItemResultMap">
+        SELECT * FROM order_items WHERE order_id = #{orderId}
+    </select>
+
+    <insert id="insert" parameterType="com.drinkorder.entity.OrderItem">
+        INSERT INTO order_items (order_id, drink_id, name, quantity, price, image)
+        VALUES (#{orderId}, #{drinkId}, #{name}, #{quantity}, #{price}, #{image})
+    </insert>
+
+    <update id="update" parameterType="com.drinkorder.entity.OrderItem">
+        UPDATE order_items SET
+            order_id = #{orderId},
+            drink_id = #{drinkId},
+            name = #{name},
+            quantity = #{quantity},
+            price = #{price},
+            image = #{image}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM order_items WHERE id = #{id}
+    </delete>
+
+    <delete id="deleteByOrderId">
+        DELETE FROM order_items WHERE order_id = #{orderId}
+    </delete>
+
+</mapper>

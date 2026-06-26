@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drinkorder.mapper.ReviewMapper">
+
+    <resultMap id="ReviewResultMap" type="com.drinkorder.entity.Review">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="user_avatar" property="userAvatar"/>
+        <result column="order_id" property="orderId"/>
+        <result column="rating" property="rating"/>
+        <result column="content" property="content"/>
+        <result column="merchant_reply" property="merchantReply"/>
+        <result column="created_at" property="createdAt"/>
+    </resultMap>
+
+    <select id="findById" resultMap="ReviewResultMap">
+        SELECT * FROM reviews WHERE id = #{id}
+    </select>
+
+    <select id="findByOrderId" resultMap="ReviewResultMap">
+        SELECT * FROM reviews WHERE order_id = #{orderId}
+    </select>
+
+    <select id="findByUserId" resultMap="ReviewResultMap">
+        SELECT * FROM reviews WHERE user_id = #{userId}
+    </select>
+
+    <select id="findAll" resultMap="ReviewResultMap">
+        SELECT * FROM reviews
+    </select>
+
+    <insert id="insert" parameterType="com.drinkorder.entity.Review">
+        INSERT INTO reviews (user_id, user_name, user_avatar, order_id, rating, content, merchant_reply, created_at)
+        VALUES (#{userId}, #{userName}, #{userAvatar}, #{orderId}, #{rating}, #{content}, #{merchantReply}, #{createdAt})
+    </insert>
+
+    <update id="update" parameterType="com.drinkorder.entity.Review">
+        UPDATE reviews SET
+            user_id = #{userId},
+            user_name = #{userName},
+            user_avatar = #{userAvatar},
+            order_id = #{orderId},
+            rating = #{rating},
+            content = #{content},
+            merchant_reply = #{merchantReply},
+            created_at = #{createdAt}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM reviews WHERE id = #{id}
+    </delete>
+
+    <update id="updateReply">
+        UPDATE reviews SET merchant_reply = #{merchantReply} WHERE id = #{id}
+    </update>
+
+</mapper>

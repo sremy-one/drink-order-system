@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drinkorder.mapper.CouponMapper">
+
+    <resultMap id="CouponResultMap" type="com.drinkorder.entity.Coupon">
+        <id column="id" property="id"/>
+        <result column="code" property="code"/>
+        <result column="discount" property="discount"/>
+        <result column="minimum_spend" property="minimumSpend"/>
+        <result column="expire_date" property="expireDate"/>
+        <result column="target_member_level" property="targetMemberLevel"/>
+        <result column="min_consumption" property="minConsumption"/>
+        <result column="is_active" property="isActive"/>
+        <result column="description" property="description"/>
+    </resultMap>
+
+    <select id="findById" resultMap="CouponResultMap">
+        SELECT * FROM coupons WHERE id = #{id}
+    </select>
+
+    <select id="findByCode" resultMap="CouponResultMap">
+        SELECT * FROM coupons WHERE code = #{code}
+    </select>
+
+    <select id="findAll" resultMap="CouponResultMap">
+        SELECT * FROM coupons
+    </select>
+
+    <select id="findActive" resultMap="CouponResultMap">
+        SELECT * FROM coupons WHERE is_active = true
+    </select>
+
+    <select id="findByMemberLevel" resultMap="CouponResultMap">
+        SELECT * FROM coupons WHERE target_member_level = #{memberLevel}
+    </select>
+
+    <insert id="insert" parameterType="com.drinkorder.entity.Coupon">
+        INSERT INTO coupons (code, discount, minimum_spend, expire_date, target_member_level, min_consumption, is_active, description)
+        VALUES (#{code}, #{discount}, #{minimumSpend}, #{expireDate}, #{targetMemberLevel}, #{minConsumption}, #{isActive}, #{description})
+    </insert>
+
+    <update id="update" parameterType="com.drinkorder.entity.Coupon">
+        UPDATE coupons SET
+            code = #{code},
+            discount = #{discount},
+            minimum_spend = #{minimumSpend},
+            expire_date = #{expireDate},
+            target_member_level = #{targetMemberLevel},
+            min_consumption = #{minConsumption},
+            is_active = #{isActive},
+            description = #{description}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM coupons WHERE id = #{id}
+    </delete>
+
+    <update id="updateActive">
+        UPDATE coupons SET is_active = #{isActive} WHERE id = #{id}
+    </update>
+
+</mapper>

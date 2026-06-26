@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --color-primary: #FF7E5F;
+  --color-secondary: #FEB47B;
+  --color-accent: #6C5CE7;
+  --shade-hue: 195;
+  --on-color: hsl(var(--shade-hue), 90%, 65%);
+  --glow-alpha: hsla(var(--shade-hue), 90%, 65%, 0.15);
+  --bg-deep: #121921;
+}
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-900 overflow-x-hidden transition-colors duration-300;
+  }
+}
+
+@layer components {
+  .joy-gradient {
+    background: linear-gradient(135deg, #FF7E5F 0%, #FEB47B 100%);
+  }
+
+  .joy-card {
+    background-color: white;
+    border-radius: 1.5rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    border: 1px solid #f1f5f9;
+    padding: 1rem;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+  }
+
+  .joy-card:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transform: scale(1.02);
+  }
+
+  .joy-btn-primary {
+    background: linear-gradient(135deg, #FF7E5F 0%, #FEB47B 100%);
+    color: white;
+    font-weight: 700;
+    padding: 0.75rem 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 15px -3px rgba(255, 126, 95, 0.2);
+    transition-property: all;
+  }
+}
+
+.tab-bar-item {
+  @apply flex flex-col items-center justify-center gap-1 text-slate-400 py-2;
+}
+
+.tab-bar-item.router-link-active {
+  @apply text-orange-500 font-bold;
+}
+
+@keyframes bounce-subtle {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.animate-joy {
+  animation: bounce-subtle 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.animate-text-shimmer {
+  background: linear-gradient(90deg, #fff 0%, #fff 40%, #ffd700 50%, #fff 60%, #fff 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 2s linear infinite;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}

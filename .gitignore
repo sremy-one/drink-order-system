@@ -1,0 +1,121 @@
+# ===================== 系统自带文件 =====================
+# Windows
+Thumbs.db
+.DS_Store
+desktop.ini
+# Mac
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+# 隐藏文件
+*~
+*.swp
+*.swo
+
+# ===================== IDE 编辑器缓存 =====================
+# IDEA / JetBrains系列
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+target/classes/
+# VS Code
+.vscode/
+*.code-workspace
+# Eclipse
+.classpath
+.project
+.c9/
+# NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+*.nbm
+# 其他编辑器
+*.sublime-project
+*.sublime-workspace
+
+# ===================== SpringBoot 后端 Java Maven =====================
+# Maven 依赖包
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+# SpringBoot 运行缓存
+*.log
+logs/
+spring.log
+spring.log.*
+# 临时编译文件
+*.class
+# 本地配置（重要！不要上传数据库、密钥）
+application-dev.yml
+application-dev.yaml
+application-test.yml
+application-test.yaml
+application-local.yml
+application-local.yaml
+application-dev.properties
+application-test.properties
+application-local.properties
+# 数据库缓存、h2文件
+*.h2.db
+*.trace.db
+# 上传临时文件、本地缓存
+upload/
+temp/
+cache/
+# jar包备份
+*.jar
+*.war
+
+# ===================== Vue3 前端 Node 项目 =====================
+# 依赖包（超大文件夹，必须忽略）
+node_modules/
+# npm/yarn 日志
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+# 打包产物 dist
+frontend/dist/
+frontend/dist-ssr/
+# 本地环境变量
+.env.local
+.env.*.local
+# Vue缓存
+frontend/.vite/
+frontend/.nuxt/
+# 编辑器生成的本地配置
+frontend/.env
+frontend/.env.dev
+# 静态临时资源
+frontend/node_modules/.cache/
+# 操作系统生成的前端杂项
+frontend/coverage/
+frontend/test-report/
+
+# ===================== 其他私有敏感文件 =====================
+# 密钥、证书
+*.pem
+*.key
+*.crt
+*.p12
+# 本地脚本、私有文档
+*.bat
+*.sh
+# 数据库备份
+*.sql
+*.dump
+# 第三方工具
+docker-compose.override.yml
+.dockerignore

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drinkorder.mapper.OrderMapper">
+
+    <resultMap id="OrderResultMap" type="com.drinkorder.entity.Order">
+        <id column="id" property="id"/>
+        <result column="order_id" property="orderId"/>
+        <result column="type" property="type"/>
+        <result column="status" property="status"/>
+        <result column="total" property="total"/>
+        <result column="time" property="time"/>
+        <result column="customer_id" property="customerId"/>
+        <result column="branch_id" property="branchId"/>
+        <result column="pickup_code" property="pickupCode"/>
+        <result column="payment_method" property="paymentMethod"/>
+    </resultMap>
+
+    <select id="findById" resultMap="OrderResultMap">
+        SELECT * FROM orders WHERE id = #{id}
+    </select>
+
+    <select id="findByOrderId" resultMap="OrderResultMap">
+        SELECT * FROM orders WHERE order_id = #{orderId}
+    </select>
+
+    <select id="findAll" resultMap="OrderResultMap">
+        SELECT * FROM orders
+    </select>
+
+    <select id="findByCustomerId" resultMap="OrderResultMap">
+        SELECT * FROM orders WHERE customer_id = #{customerId}
+    </select>
+
+    <select id="findByBranchId" resultMap="OrderResultMap">
+        SELECT * FROM orders WHERE branch_id = #{branchId}
+    </select>
+
+    <select id="findByStatus" resultMap="OrderResultMap">
+        SELECT * FROM orders WHERE status = #{status}
+    </select>
+
+    <select id="findByCustomerIdAndType" resultMap="OrderResultMap">
+        SELECT * FROM orders WHERE customer_id = #{customerId} AND type = #{type}
+    </select>
+
+    <select id="findTodayOrdersByBranchId" resultMap="OrderResultMap">
+        SELECT * FROM orders WHERE branch_id = #{branchId} AND DATE(time) = CURDATE()
+    </select>
+
+    <insert id="insert" parameterType="com.drinkorder.entity.Order" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO orders (order_id, type, status, total, time, customer_id, branch_id, pickup_code, payment_method)
+        VALUES (#{orderId}, #{type}, #{status}, #{total}, #{time}, #{customerId}, #{branchId}, #{pickupCode}, #{paymentMethod})
+    </insert>
+
+    <update id="update" parameterType="com.drinkorder.entity.Order">
+        UPDATE orders SET
+            order_id = #{orderId},
+            type = #{type},
+            status = #{status},
+            total = #{total},
+            time = #{time},
+            customer_id = #{customerId},
+            branch_id = #{branchId},
+            pickup_code = #{pickupCode},
+            payment_method = #{paymentMethod}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM orders WHERE id = #{id}
+    </delete>
+
+    <update id="updateStatus">
+        UPDATE orders SET status = #{status} WHERE id = #{id}
+    </update>
+
+</mapper>
